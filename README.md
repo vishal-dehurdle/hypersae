@@ -85,28 +85,25 @@ Evaluated at scale on **Google Gemma-2-2B Layer 13 residual stream activations (
 
 ```python
 import torch
-from hypersae import HyperSAE, TriPartiteLoss, HyperSAETrainer
+from hypersae import HyperSAE, CoActivationQueue, TriPartiteLoss, HyperSAETrainer
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-# 1. Instantiate HyperSAE for Gemma-2-2B (d_model=2304, dict_size=16384)
+# 1. Instantiate HyperSAE model, CoActivationQueue, and TriPartiteLoss
 sae = HyperSAE(d_model=2304, dict_size=16384).to(device)
+queue = CoActivationQueue(dict_size=16384).to(device)
+loss_fn = TriPartiteLoss(l1_coeff=0.005, entail_coeff=0.01)
 
-# 2. Forward pass on residual stream batch
+# 2. Instantiate HyperSAETrainer
+trainer = HyperSAETrainer(model=sae, queue=queue, loss_fn=loss_fn, lr=1e-3)
+
+# 3. Train step on residual stream activation batch
 x = torch.randn(64, 2304, device=device)
-x_hat, f = sae(x)
+metrics = trainer.train_step(x)
 
-# 3. Compute TriPartite Loss (MSE + L1 Sparsity + Poincaré Entailment)
-loss_fn = TriPartiteLoss(l1_coeff=0.005, poincare_coeff=0.01)
-loss, metrics = loss_fn(x, x_hat, f, sae)
-
-print(f"Total Loss: {loss.item():.4f}")
-print(f"Reconstruction MSE: {metrics['mse']:.4f}")
-print(f"L0 Sparsity: {metrics['l0']:.1f} active features/token")
-
-# 4. Export learned hierarchical ontology graph
-dag = sae.export_ontology_graph(K=0.5)
-print(f"Extracted Taxonomy DAG: {dag.number_of_nodes()} nodes, {dag.number_of_edges()} edges")
+print(f"Total Loss: {metrics['loss_total']:.4f}")
+print(f"Reconstruction MSE: {metrics['loss_recon']:.4f}")
+print(f"Poincaré Entailment Penalty: {metrics['loss_entail']:.4f}")
 ```
 
 ---
