@@ -1,9 +1,12 @@
 # HyperSAE: High-Performance Hyperbolic Sparse Autoencoders
 
-[![PyPI Version](https://img.shields.io/pypi/v/hypersae.svg)](https://pypi.org/project/hypersae/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
-[![PyTorch 2.0+](https://img.shields.io/badge/PyTorch-2.0+-orange.svg)](https://pytorch.org/)
+[![PyPI](https://img.shields.io/pypi/v/hypersae?logo=pypi&logoColor=white&color=0055cc)](https://pypi.org/project/hypersae/)
+[![Downloads](https://img.shields.io/pypi/dm/hypersae?color=blue)](https://pypi.org/project/hypersae/)
+[![Python](https://img.shields.io/pypi/pyversions/hypersae?logo=python&logoColor=white)](https://pypi.org/project/hypersae/)
+[![Core](https://img.shields.io/badge/core-PyTorch_2.0+-ee4c2c?logo=pytorch&logoColor=white)](https://pytorch.org/)
+[![CI](https://github.com/vishal-dehurdle/hypersae/actions/workflows/ci.yml/badge.svg)](https://github.com/vishal-dehurdle/hypersae/actions)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Paper](https://img.shields.io/badge/Paper-Empirical_Validation-6eaaff)](https://vishalvermalabs.com/papers/empirical-validation-hypersae-poincare-geometry/)
 
 `hypersae` is a high-performance mechanistic interpretability engine designed to extract hierarchical concept ontologies from Large Language Models (LLMs). By decoupling hyperbolic geometry from the forward pass, it provides the zero-latency execution of standard Euclidean Sparse Autoencoders alongside the semantic mapping power of Riemannian negative curvature.
 
