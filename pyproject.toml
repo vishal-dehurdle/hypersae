@@ -1,0 +1,67 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "hypersae"
+version = "0.1.1"
+description = "High-Performance Hyperbolic Sparse Autoencoders for Mechanistic Interpretability"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+    { name = "Vishal Verma", email = "vishal.verma@dehurdle.com" }
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+keywords = [
+    "hyperbolic-geometry",
+    "poincare-disk",
+    "sparse-autoencoders",
+    "mechanistic-interpretability",
+    "gemma-2-2b",
+    "representation-learning",
+    "tripartite-loss",
+]
+dependencies = [
+    "torch>=2.0.0",
+    "geoopt>=0.5.0",
+    "einops>=0.6.0",
+    "networkx>=3.0",
+    "plotly>=5.0.0",
+    "geomstats>=2.5.0",
+    "transformer-lens>=1.14.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/vishal-dehurdle/hypersae"
+Repository = "https://github.com/vishal-dehurdle/hypersae"
+Issues = "https://github.com/vishal-dehurdle/hypersae/issues"
+Documentation = "https://vishalvermalabs.com/papers/empirical-validation-hypersae-poincare-geometry/"
+Changelog = "https://github.com/vishal-dehurdle/hypersae/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "isort>=5.0.0",
+    "mypy>=1.0.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/hypersae"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
